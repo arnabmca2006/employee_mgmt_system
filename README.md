@@ -25,16 +25,17 @@ pip install -r requirements.txt
 ```
   cd employee_mgmt_system
   pip install .
-  set "PYTHONUNBUFFERED=1" & set "CONFIG_FILE=%cd%/ems/resources/application.yaml" & python ems/main.py
+  set "PYTHONUNBUFFERED=1" & set "CONFIG_FILE=%cd%/ems/resources/application-local.yaml" & python ems/main.py
 ```
 - for linux
 ```
   cd employee_mgmt_system
   pip install .
-  export "PYTHONUNBUFFERED=1" && set "CONFIG_FILE=%cd%/ems/resources/application.yaml" && python ems/main.py
+  export "PYTHONUNBUFFERED=1" && set "CONFIG_FILE=%cd%/ems/resources/application-local.yaml" && python ems/main.py
 ```
 
 ### Open the application in browser
+For basic authentication, ter Username and password as admin
 ```
 http://localhost:5000/docs
 ```
