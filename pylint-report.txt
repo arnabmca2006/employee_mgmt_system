@@ -1,0 +1,171 @@
+************* Module ems.util.__init__
+ems\util\__init__.py:1:0: R0801: Similar lines in 2 files
+==ems.service.department_service:[87:112]
+==ems.service.employee_service:[108:134]
+                        employee_name=row.employee_name,
+                        date_of_birth=str(row.date_of_birth) if row.date_of_birth is not None else None,
+                        gender=row.gender, nationality=row.nationality,
+                        hire_date=str(row.hire_date) if row.hire_date is not None else None,
+                        job_title=row.job_title,
+                        email=row.email,
+                        phone_number=row.phone_number,
+                        address=row.address,
+                        basic_salary=row.basic_salary if row.basic_salary is not None else 0.0,
+                        allowances=row.allowances if row.allowances is not None else 0.0,
+                        deductions=row.deductions if row.deductions is not None else 0.0,
+                        total_salary=row.total_salary if row.total_salary is not None else 0.0
+                    )
+                )
+
+        return res
+
+
+    def add_by_department_id(self, department_id, employee, user) -> Response:
+        """
+        This function insert employee details under specific department
+        :param department_id:
+        :param employee:
+        :param user:
+        :return:
+        """ (duplicate-code)
+
+
+Report
+======
+1046 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |38     |38         |=          |18.42       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |28     |28         |=          |3.57        |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |72     |72         |=          |93.06       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |31     |31         |=          |16.13       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+External dependencies
+---------------------
+::
+
+    ems 
+      \-entity 
+      | \-department_dto (ems.repository.department_repository,ems.tests.test_department_service,ems.tests.test_employee_service)
+      | \-employee_dto (ems.repository.department_repository,ems.repository.employee_repository,ems.tests.test_employee_service,ems.tests.test_salary_breakup_service)
+      | \-salary_breakup_dto (ems.repository.department_repository,ems.repository.employee_repository,ems.repository.salary_breakup_repository,ems.tests.test_salary_breakup_service)
+      \-model 
+      | \-department (ems.controller.department_controller,ems.service.department_service,ems.tests.test_department_service)
+      | \-employee (ems.controller.employee_controller,ems.service.employee_service,ems.tests.test_employee_service)
+      | \-response (ems.controller.department_controller,ems.controller.employee_controller,ems.controller.salary_breakup_controller,ems.service.department_service,ems.service.employee_service,ems.service.salary_breakup_service,ems.tests.test_department_service,ems.tests.test_employee_service,ems.tests.test_salary_breakup_service)
+      | \-salary_breakup (ems.controller.salary_breakup_controller,ems.service.salary_breakup_service,ems.tests.test_salary_breakup_service)
+      \-repository 
+      | \-department_repository (ems.service.department_service,ems.service.employee_service)
+      | \-employee_repository (ems.service.employee_service,ems.service.salary_breakup_service)
+      | \-salary_breakup_repository (ems.service.salary_breakup_service)
+      \-service 
+      | \-department_service (ems.controller.department_controller,ems.tests.test_department_service)
+      | \-employee_service (ems.controller.employee_controller,ems.tests.test_employee_service)
+      | \-salary_breakup_service (ems.controller.salary_breakup_controller,ems.tests.test_salary_breakup_service)
+      \-util 
+        \-configuration (ems.auth.keycloak_service)
+        \-db_operations (ems.repository.base_repository,ems.service.base_service)
+        \-utils (ems.service.department_service,ems.service.employee_service,ems.service.salary_breakup_service,ems.tests.test_department_service,ems.tests.test_employee_service,ems.tests.test_salary_breakup_service)
+    fastapi (ems.auth.basic_auth,ems.auth.keycloak_service,ems.controller.default_controller,ems.controller.department_controller,ems.controller.employee_controller,ems.controller.salary_breakup_controller,ems.main,ems.service.department_service,ems.service.employee_service,ems.service.salary_breakup_service)
+      \-exceptions (ems.main)
+      \-middleware 
+      | \-cors (ems.main)
+      \-responses (ems.main)
+      \-security (ems.auth.basic_auth,ems.auth.keycloak_service)
+    keycloak (ems.auth.keycloak_service)
+    pydantic (ems.model,ems.model.department,ems.model.employee,ems.model.response,ems.model.salary_breakup)
+    pytest (ems.tests.test_department_service,ems.tests.test_employee_service,ems.tests.test_salary_breakup_service)
+    sqlalchemy (ems.entity.department_dto,ems.entity.employee_dto,ems.entity.salary_breakup_dto,ems.repository.employee_repository,ems.util.db_operations)
+      \-exc (ems.util.db_operations)
+      \-orm (ems.entity,ems.entity.employee_dto,ems.entity.salary_breakup_dto,ems.util.db_operations)
+    uvicorn (ems.main)
+    yaml (ems.util.configuration)
+
+
+
+2341 lines have been analyzed
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |1580   |67.49 |1580     |=          |
++----------+-------+------+---------+-----------+
+|docstring |387    |16.53 |387      |=          |
++----------+-------+------+---------+-----------+
+|comment   |6      |0.26  |6        |=          |
++----------+-------+------+---------+-----------+
+|empty     |368    |15.72 |368      |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |0          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |0      |1        |1          |
++-----------+-------+---------+-----------+
+|refactor   |1      |1        |1          |
++-----------+-------+---------+-----------+
+|warning    |0      |1        |1          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |0          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++------------------+------+--------+---------+-----------+
+|module            |error |warning |refactor |convention |
++==================+======+========+=========+===========+
+|ems.util.__init__ |0.00  |0.00    |100.00   |0.00       |
++------------------+------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------+------------+
+|message id     |occurrences |
++===============+============+
+|duplicate-code |1           |
++---------------+------------+
+
+
+
+
+------------------------------------------------------------------
+Your code has been rated at 9.99/10 (previous run: 9.97/10, +0.02)
+

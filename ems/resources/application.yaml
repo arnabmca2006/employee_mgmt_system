@@ -1,0 +1,18 @@
+server.port : 5000
+auth.method: basic
+service.prefix: ems
+
+db:
+  username: $DB_USERNAME
+  password: $DB_PASSOWRD
+  url: $DB_HOST
+  port: $DB_PORT
+  name: $DB_NAME
+  schema: $DB_SCHEMA
+
+keycloak:
+  url: http://$KEYCLOAK_HOST:KEYCLOAK_PORT/auth/
+  realm: $KEYCLOAK_REALM
+  client_id: $KEYCLOAK_CLIENT_ID
+  client_secret: $KEYCLOAK_SECRET
+  https_cert: $KEYCLOAK_CERT

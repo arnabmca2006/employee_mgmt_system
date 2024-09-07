@@ -1,0 +1,18 @@
+server.port : 5000
+auth.method: basic
+service.prefix: ems
+
+db:
+  username: postgres
+  password: postgres
+  url: localhost
+  port: 5432
+  name: ems
+  schema: ems
+
+keycloak:
+  url: http://localhost:8090/auth/
+  realm: "ems"
+  client_id: "backend"
+  client_secret: ""
+  https_cert: ""

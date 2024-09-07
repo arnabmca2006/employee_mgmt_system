@@ -1,0 +1,77 @@
+version: '3.4'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ems
+    ports:
+      - 5432:5432
+    volumes:
+      - ./sql_scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - emsnet
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    hostname: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    depends_on:
+      - postgres
+    ports:
+      - 5433:80
+    networks:
+      - emsnet
+
+  #keycloak:
+  #  image: quay.io/keycloak/keycloak:15.0.2
+  #  container_name: keycloak
+  #  hostname: keycloak
+  #  restart: always
+  #  environment:
+  #    KEYCLOAK_USER: admin
+  #    KEYCLOAK_PASSWORD: admin
+  #  ports:
+  #    - 8443:8443
+  #    - 8090:8080
+  #  networks:
+  #    - emsnet
+
+  ems-api:
+    build:
+      context: .
+    image: ems-api:0.0.1
+    container_name: ems-api
+    hostname: ams-api
+    restart: always
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ems
+      DB_SCHEMA: ems
+      DB_USERNAME: postgres
+      DB_PASSOWRD: postgres
+      KEYCLOAK_HOST: keycloak
+      KEYCLOAK_PORT: 8090
+      KEYCLOAK_REALM : ems
+      KEYCLOAK_CLIENT_ID: backend
+      KEYCLOAK_SECRET: ""
+      KEYCLOAK_CERT: ""
+    depends_on:
+      - postgres
+    ports:
+      - 5000:5000
+    networks:
+      - emsnet
+
+networks:
+  emsnet:
+    driver: bridge
