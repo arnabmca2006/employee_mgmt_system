@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ```
 
 ### Open the application in browser
-For basic authentication, ter Username and password as admin
+For basic authentication, enter Username and Password as admin
 ```
 http://localhost:5000/docs
 ```
