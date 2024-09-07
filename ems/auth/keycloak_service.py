@@ -11,14 +11,13 @@ app_config = Configuration()
 class KeyCloakAuth:
     """
     This class intercept all API calls between HTTP APIs and all service routers. Extract the token and introspect the token
-    to get the user information and user role. On valid token it allows the call to proceed for call or generate HTTP error
-    UNAUTHORIZED for the given call.
+    to get the user information and user role.
     """
 
     def __init__(self):
         """
-        Check and load all required configuration for accessing key-cloak APIs
-        The mandatory parameters are kck_server, kck_realm & kck_client
+        Load all required configuration for accessing key-cloak APIs
+        The mandatory parameters are keycloak.url, keycloak.realm & keycloak.client_id
         """
         kck_server = app_config.configuration["keycloak"]["url"]
         kck_realm = app_config.configuration["keycloak"]["realm"]
@@ -49,18 +48,13 @@ class KeyCloakAuth:
         if not kck_client or len(kck_client) == 0:
             logging.error('Key-Cloak client can not be null or empty if KeyCloakAuth is enable')
             sys.exit(1)
-        self.kck_open_id = KeycloakOpenID(server_url=kck_server,
-                                         client_id=kck_client,
-                                         realm_name=kck_realm,
-                                         client_secret_key=kck_client_secret,
-                                         verify=kc_cert)
+        self.kck_open_id = KeycloakOpenID(server_url=kck_server, client_id=kck_client, realm_name=kck_realm, client_secret_key=kck_client_secret, verify=kc_cert)
 
     @staticmethod
     def has_access(credentials: HTTPAuthorizationCredentials=Depends(HTTPBearer()), request: Request=Request):
         """
         This static method invoked for every call intercepted before going to router services.
-        with successful validation it allow the call to process to router service, or else it raise
-        HTTP UNAUTHORIZED error.
+        With successful validation it allows to process to router service, or else it raises HTTP UNAUTHORIZED error.
         Arguments:
             credentials - The access token pass by client.
             request - the http request object holding all call details.

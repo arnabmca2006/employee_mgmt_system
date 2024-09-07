@@ -1,6 +1,5 @@
 server.port : 5000
 auth.method: basic
-service.prefix: ems
 
 db:
   username: postgres
