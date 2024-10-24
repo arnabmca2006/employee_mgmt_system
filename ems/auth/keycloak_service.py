@@ -25,7 +25,7 @@ class KeyCloakAuth:
         kck_client_secret = app_config.configuration["keycloak"]["client_secret"]
         #Checking for key-cloak certificate
         kc_cert = False
-        if len(app_config.configuration["keycloak"]["https_cert"]) > 0 and str(app_config.configuration["keycloak"]["https_cert"]).lower() != "false" :
+        if app_config.configuration["keycloak"]["https_cert"] and len(app_config.configuration["keycloak"]["https_cert"]) > 0 and str(app_config.configuration["keycloak"]["https_cert"]).lower() != "false" :
             kc_cert = app_config.configuration["keycloak"]["https_cert"]
             logging.info('key-cloak certificate available in : [%s]', kc_cert)
         else:

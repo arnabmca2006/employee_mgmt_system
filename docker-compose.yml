@@ -4,7 +4,7 @@ services:
     image: postgres
     container_name: postgres
     hostname: postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -20,7 +20,7 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin
     hostname: pgadmin
-    restart: always
+    restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: postgres
@@ -35,13 +35,15 @@ services:
   #  image: quay.io/keycloak/keycloak:15.0.2
   #  container_name: keycloak
   #  hostname: keycloak
-  #  restart: always
+  #  restart: unless-stopped
   #  environment:
   #    KEYCLOAK_USER: admin
   #    KEYCLOAK_PASSWORD: admin
+  #    DB_VENDOR: h2
   #  ports:
-  #    - 8443:8443
   #    - 8090:8080
+  #  command:
+  #    - start-dev
   #  networks:
   #    - emsnet
 
@@ -51,7 +53,7 @@ services:
     image: ems-api:0.0.1
     container_name: ems-api
     hostname: ams-api
-    restart: always
+    restart: unless-stopped
     environment:
       DB_HOST: postgres
       DB_PORT: 5432
